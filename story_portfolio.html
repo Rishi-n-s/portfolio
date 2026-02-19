@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rishi Solanki | Web-Slinging Developer</title>
+
+    <!-- SEO & Metadata -->
+    <meta name="description" content="Portfolio of Rishi Solanki - Spider-Man India themed digital experiences.">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Syne:wght@700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="story_portfolio.css">
+
+    <!-- Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+
+<body>
+
+    <!-- 1. Background Atmosphere -->
+    <div id="app-background">
+        <div class="web-lines"></div>
+        <div class="web-overlay"></div>
+        <div class="skyline" id="skyline"></div>
+    </div>
+
+    <!-- 2. UI Overlays -->
+    <div id="cursor-follower" class="cursor-main"></div>
+    <div id="cursor-dot" class="cursor-dot"></div>
+    <div id="spidey-sense-fx"></div>
+    <div class="scroll-progress-bar"></div>
+
+    <!-- 3. Navigation -->
+    <nav class="main-nav">
+        <div class="container">
+            <div class="logo">RISHI<span>.</span>SOLANKI</div>
+            <div class="nav-links">
+                <a href="#hero" class="active">Origin</a>
+                <a href="#missions">Missions</a>
+                <a href="#tech-suit">Tech Suit</a>
+                <a href="#contact">Signal</a>
+            </div>
+            <div class="chapter-indicator">CH. 01</div>
+        </div>
+    </nav>
+
+    <!-- 4. Main Content -->
+    <main class="story-wrapper">
+
+        <!-- Hero Section -->
+        <section id="hero" class="section hero-section">
+            <div class="container">
+                <div class="hero-grid">
+                    <div class="hero-visual">
+                        <div class="profile-3d-scene" id="profile3d">
+                            <div class="profile-3d-card">
+                                <!-- Orbital rings -->
+                                <div class="orbit orbit-1"><span class="orbit-dot"></span></div>
+                                <div class="orbit orbit-2"><span class="orbit-dot"></span></div>
+                                <div class="orbit orbit-3"><span class="orbit-dot"></span></div>
+
+                                <!-- Web burst lines -->
+                                <div class="web-burst">
+                                    <span></span><span></span><span></span>
+                                    <span></span><span></span><span></span>
+                                    <span></span><span></span>
+                                </div>
+
+                                <!-- Profile image -->
+                                <div class="profile-frame">
+                                    <img src="rishi.png" alt="Rishi Solanki" class="profile-img">
+                                    <div class="profile-glow"></div>
+                                </div>
+                            </div>
+
+                            <!-- Floating badge -->
+                            <div class="floating-badge">
+                                <span class="icon">🕷️</span>
+                                <div class="badge-text">
+                                    <strong>Rishi Solanki</strong>
+                                    <span>"Chai-Powered Developer"</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hero-text">
+                        <h1 class="title">LEAP INTO THE <br><span class="accent glitch"
+                                data-text="CODE-VERSE.">CODE-VERSE.</span></h1>
+                        <p class="subtitle">Crafting digital webs with precision and the spirit of rishi solanki.</p>
+                        <div class="actions">
+                            <a href="#missions" class="btn primary">View Missions</a>
+                            <a href="#contact" class="btn secondary">Send Signal</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Missions Section -->
+        <section id="missions" class="section missions-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">ACTIVE <span class="accent">MISSIONS</span></h2>
+                    <p>Intel gathered from 18 specialized practical operations.</p>
+                </div>
+                <div class="filter-bar">
+                    <input type="text" id="mission-search" placeholder="Filter Intel...">
+                </div>
+                <div class="mission-grid" id="mission-grid">
+                    <!-- Missions injected by JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Tech Suit Section -->
+        <section id="tech-suit" class="section tech-section">
+            <div class="container">
+                <div class="tech-grid">
+                    <div class="tech-card">
+                        <div class="card-header">
+                            <h3>THE TECH SUIT</h3>
+                            <span class="version">v2.0 Beta</span>
+                        </div>
+                        <div class="tech-list" id="tech-list">
+                            <!-- Tech skills injected by JavaScript -->
+                        </div>
+                    </div>
+                    <div class="tech-quote">
+                        <blockquote>"With great code, comes great responsibility."</blockquote>
+                        <p>- The Mumbattan Principles</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="section contact-section">
+            <div class="container">
+                <div class="contact-card">
+                    <h2>SEND THE <span class="accent">SIGNAL.</span></h2>
+                    <p>Need a hero for your next project? Dispatch your message to Mumbattan headquarters.</p>
+                    <a href="mailto:rishisolanki7319@gmail.com" class="contact-email">rishisolanki7319@gmail.com</a>
+                    <div class="social-links">
+                        <a href="#" class="social-item">GitHub</a>
+                        <a href="#" class="social-item">LinkedIn</a>
+                        <a href="#" class="social-item">Twitter</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <p>&copy; 2024 Rishi Solanki. Handcrafted in the Code-Verse.</p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="story_portfolio.js"></script>
+</body>
+
+</html>
