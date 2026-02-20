@@ -1,0 +1,2105 @@
+/* =============================================
+   00. INTRO / SPLASH ANIMATION
+   ============================================= */
+
+/* Lock scroll while intro plays */
+body.intro-active {
+    overflow: hidden;
+}
+
+#intro-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    overflow: hidden;
+    /* Clean dark background — hero image handled by .intro-pavitr-bg */
+    background:
+        radial-gradient(ellipse at 25% 60%, rgba(255, 153, 51, 0.12) 0%, transparent 55%),
+        radial-gradient(ellipse at 75% 30%, rgba(0, 128, 128, 0.10) 0%, transparent 50%),
+        #070707;
+    background-color: #070707;
+    /* Exit: sweeps up */
+    transition: transform 0.9s cubic-bezier(0.76, 0, 0.24, 1),
+        opacity 0.4s ease 0.6s;
+    animation: introBgZoom 4s ease forwards;
+}
+
+@keyframes introBgZoom {
+    from {
+        background-size: 120%;
+    }
+
+    to {
+        background-size: cover;
+    }
+}
+
+#intro-overlay.intro-exit {
+    transform: translateY(-100%);
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* ── Spider-Man hero background ── */
+.intro-spider-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    /* Base dark color */
+    background-color: #050505;
+    /* Cinematic Background: Pavitr Prabhakar / Spider-Man India */
+    background-image:
+        /* Dark gradient overlay for text readability */
+        linear-gradient(to right,
+            rgba(0, 0, 0, 0.9) 0%,
+            rgba(0, 0, 0, 0.7) 40%,
+            rgba(0, 0, 0, 0.4) 100%),
+        /* The main background image */
+        url('spiderbackground.jpg'),
+        /* Fallback subtle pattern if image fails */
+        radial-gradient(circle at 50% 50%, #1a0a0a 0%, #000000 100%);
+
+    background-size: cover;
+    background-position: center top;
+    background-repeat: no-repeat;
+
+    /* Animation: Slow zoom for cinematic effect */
+    animation: spiderBgZoom 10s ease-out forwards;
+    pointer-events: none;
+}
+
+@keyframes spiderBgZoom {
+    0% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(1.0);
+    }
+}
+
+/* ── Radial web burst (SVG background) ── */
+.intro-web-burst {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+}
+
+.intro-web-svg {
+    width: min(95vw, 95vh);
+    height: min(95vw, 95vh);
+    opacity: 0;
+    animation: webBurstIn 1.2s ease 0.1s forwards;
+    overflow: visible;
+}
+
+/* ── Bold spokes (12 main rays) ── */
+.web-ray {
+    stroke: #ff9933;
+    stroke-width: 1.4;
+    stroke-linecap: round;
+    opacity: 0;
+    animation: rayIn 0.5s ease forwards;
+}
+
+/* ── Thin secondary spokes (12 half-angle rays) ── */
+.web-ray-thin {
+    stroke: rgba(255, 153, 51, 0.45);
+    stroke-width: 0.7;
+}
+
+/* Stagger all 24 rays */
+.web-ray:nth-child(1) {
+    animation-delay: 0.10s;
+}
+
+.web-ray:nth-child(2) {
+    animation-delay: 0.14s;
+}
+
+.web-ray:nth-child(3) {
+    animation-delay: 0.18s;
+}
+
+.web-ray:nth-child(4) {
+    animation-delay: 0.22s;
+}
+
+.web-ray:nth-child(5) {
+    animation-delay: 0.26s;
+}
+
+.web-ray:nth-child(6) {
+    animation-delay: 0.30s;
+}
+
+.web-ray:nth-child(7) {
+    animation-delay: 0.34s;
+}
+
+.web-ray:nth-child(8) {
+    animation-delay: 0.38s;
+}
+
+.web-ray:nth-child(9) {
+    animation-delay: 0.42s;
+}
+
+.web-ray:nth-child(10) {
+    animation-delay: 0.46s;
+}
+
+.web-ray:nth-child(11) {
+    animation-delay: 0.50s;
+}
+
+.web-ray:nth-child(12) {
+    animation-delay: 0.54s;
+}
+
+.web-ray:nth-child(13) {
+    animation-delay: 0.20s;
+}
+
+.web-ray:nth-child(14) {
+    animation-delay: 0.24s;
+}
+
+.web-ray:nth-child(15) {
+    animation-delay: 0.28s;
+}
+
+.web-ray:nth-child(16) {
+    animation-delay: 0.32s;
+}
+
+.web-ray:nth-child(17) {
+    animation-delay: 0.36s;
+}
+
+.web-ray:nth-child(18) {
+    animation-delay: 0.40s;
+}
+
+.web-ray:nth-child(19) {
+    animation-delay: 0.44s;
+}
+
+.web-ray:nth-child(20) {
+    animation-delay: 0.48s;
+}
+
+.web-ray:nth-child(21) {
+    animation-delay: 0.52s;
+}
+
+.web-ray:nth-child(22) {
+    animation-delay: 0.56s;
+}
+
+.web-ray:nth-child(23) {
+    animation-delay: 0.60s;
+}
+
+.web-ray:nth-child(24) {
+    animation-delay: 0.64s;
+}
+
+/* ── 6 concentric rings ── */
+.web-ring {
+    fill: none;
+    stroke: rgba(255, 153, 51, 0.30);
+    stroke-width: 1;
+    stroke-dasharray: 6 5;
+    opacity: 0;
+    animation: ringIn 0.55s ease forwards;
+}
+
+/* Inner ring: solid, brighter */
+.web-ring-inner {
+    stroke: rgba(255, 215, 0, 0.65);
+    stroke-width: 1.5;
+    stroke-dasharray: none;
+}
+
+/* Outer ring: faint, wider dash */
+.web-ring-outer {
+    stroke: rgba(255, 153, 51, 0.15);
+    stroke-dasharray: 10 8;
+}
+
+/* Stagger 6 rings */
+.web-ring:nth-child(25) {
+    animation-delay: 0.35s;
+}
+
+.web-ring:nth-child(26) {
+    animation-delay: 0.44s;
+}
+
+.web-ring:nth-child(27) {
+    animation-delay: 0.53s;
+}
+
+.web-ring:nth-child(28) {
+    animation-delay: 0.62s;
+}
+
+.web-ring:nth-child(29) {
+    animation-delay: 0.71s;
+}
+
+.web-ring:nth-child(30) {
+    animation-delay: 0.80s;
+}
+
+/* ── Cross-strand detail ── */
+.web-strand {
+    fill: none;
+    stroke: rgba(255, 153, 51, 0.35);
+    stroke-width: 0.8;
+    stroke-linecap: round;
+    opacity: 0;
+    animation: ringIn 0.4s ease 0.85s forwards;
+}
+
+@keyframes webBurstIn {
+    from {
+        opacity: 0;
+        transform: scale(0.4) rotate(-15deg);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1) rotate(0deg);
+    }
+}
+
+@keyframes rayIn {
+    from {
+        opacity: 0;
+        stroke-dasharray: 0 400;
+    }
+
+    to {
+        opacity: 1;
+        stroke-dasharray: 400 0;
+    }
+}
+
+@keyframes ringIn {
+    from {
+        opacity: 0;
+        transform: scale(0.3);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* ── Centre content ── */
+.intro-content {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+}
+
+/* Spider logo image drop-in */
+.intro-spider {
+    width: clamp(130px, 22vw, 200px);
+    height: clamp(130px, 22vw, 200px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid rgba(255, 153, 51, 0.6);
+    box-shadow:
+        0 0 20px rgba(255, 153, 51, 0.5),
+        0 0 50px rgba(255, 153, 51, 0.2),
+        inset 0 0 20px rgba(0, 0, 0, 0.6);
+    animation: spiderDrop 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) 0.3s both;
+}
+
+.intro-spider-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* Black background of the image blends with dark overlay */
+    filter:
+        drop-shadow(0 0 12px rgba(255, 153, 51, 0.9)) brightness(1.1) sepia(1) saturate(4) hue-rotate(345deg);
+}
+
+@keyframes spiderDrop {
+    from {
+        opacity: 0;
+        transform: translateY(-60px) scale(0.4) rotate(-30deg);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1) rotate(0deg);
+    }
+}
+
+/* Spider-Verse name — clearly visible */
+.intro-name {
+    font-family: 'Bangers', 'Syne', sans-serif;
+    font-size: clamp(3rem, 10vw, 7rem);
+    font-weight: 400;
+    color: #ffffff;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    position: relative;
+    opacity: 0;
+    /* Spider-Verse offset shadow: saffron right, teal deeper */
+    text-shadow:
+        3px 3px 0 #ff9933,
+        6px 6px 0 #008080;
+    line-height: 1.05;
+    animation: introNameIn 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) 0.9s forwards;
+}
+
+@keyframes introNameIn {
+    from {
+        opacity: 0;
+        transform: skewX(-6deg) translateY(30px) scaleX(0.8);
+    }
+
+    to {
+        opacity: 1;
+        transform: skewX(-6deg) translateY(0) scaleX(1);
+    }
+}
+
+@keyframes introGlitch1 {
+
+    0%,
+    90%,
+    100% {
+        transform: translateX(0);
+        opacity: 0;
+    }
+
+    92% {
+        transform: translateX(-4px);
+        opacity: 0.8;
+    }
+
+    94% {
+        transform: translateX(4px);
+        opacity: 0.8;
+    }
+
+    96% {
+        transform: translateX(-2px);
+        opacity: 0.6;
+    }
+}
+
+@keyframes introGlitch2 {
+
+    0%,
+    90%,
+    100% {
+        transform: translateX(0);
+        opacity: 0;
+    }
+
+    93% {
+        transform: translateX(5px);
+        opacity: 0.7;
+    }
+
+    95% {
+        transform: translateX(-3px);
+        opacity: 0.7;
+    }
+
+    97% {
+        transform: translateX(2px);
+        opacity: 0.5;
+    }
+}
+
+/* Subtitle tag — Spider-Verse comic caption */
+.intro-tag {
+    font-family: 'Bangers', 'Outfit', sans-serif;
+    font-size: clamp(1.1rem, 3vw, 1.7rem);
+    color: #ffd700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    text-shadow:
+        2px 2px 0 #ff9933,
+        3px 3px 0 #000;
+    opacity: 0;
+    animation: introTagIn 0.5s ease 1.4s forwards;
+}
+
+@keyframes introTagIn {
+    from {
+        opacity: 0;
+        transform: skewX(-6deg) translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: skewX(-6deg) translateY(0);
+    }
+}
+
+/* Loading bar */
+.intro-bar {
+    width: clamp(160px, 30vw, 280px);
+    height: 3px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+    overflow: hidden;
+    opacity: 0;
+    animation: introFadeUp 0.4s ease 1.5s forwards;
+}
+
+.intro-bar-fill {
+    height: 100%;
+    width: 0;
+    background: linear-gradient(90deg, #ff9933, #ffd700);
+    border-radius: 2px;
+    animation: barLoad 1.6s ease 1.6s forwards;
+    box-shadow: 0 0 10px #ff9933;
+}
+
+@keyframes barLoad {
+    from {
+        width: 0;
+    }
+
+    to {
+        width: 100%;
+    }
+}
+
+@keyframes introFadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ── Corner bracket decorations ── */
+.intro-corner {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    opacity: 0;
+    animation: cornerIn 0.4s ease 0.5s forwards;
+}
+
+.intro-corner.tl {
+    top: 30px;
+    left: 30px;
+    border-top: 2px solid #ff9933;
+    border-left: 2px solid #ff9933;
+}
+
+.intro-corner.tr {
+    top: 30px;
+    right: 30px;
+    border-top: 2px solid #ff9933;
+    border-right: 2px solid #ff9933;
+}
+
+.intro-corner.bl {
+    bottom: 30px;
+    left: 30px;
+    border-bottom: 2px solid #ff9933;
+    border-left: 2px solid #ff9933;
+}
+
+.intro-corner.br {
+    bottom: 30px;
+    right: 30px;
+    border-bottom: 2px solid #ff9933;
+    border-right: 2px solid #ff9933;
+}
+
+@keyframes cornerIn {
+    from {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* ── Spider logo in floating badge ── */
+.badge-spider-img {
+    width: 36px;
+    height: 36px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 153, 51, 0.5);
+    filter: sepia(1) saturate(4) hue-rotate(345deg) drop-shadow(0 0 4px rgba(255, 153, 51, 0.8));
+    flex-shrink: 0;
+}
+
+/* ══════════════════════════════════════════ */
+
+:root {
+    /* Theme Colors - Spider-Man India (Pavitr Prabhakar) */
+    --clr-saffron: #ff9933;
+    --clr-gold: #ffd700;
+    --clr-red: #d32f2f;
+    --clr-teal: #008080;
+    --clr-dark: #070707;
+    --clr-dark-soft: #121212;
+    --clr-text: #f0f0f0;
+    --clr-text-dim: rgba(240, 240, 240, 0.6);
+
+    /* System Colors */
+    --glass-bg: rgba(255, 255, 255, 0.03);
+    --glass-border: rgba(255, 255, 255, 0.08);
+
+    /* Typography */
+    --font-heading: 'Syne', sans-serif;
+    --font-body: 'Outfit', sans-serif;
+
+    /* Transitions */
+    --ease-spidey: cubic-bezier(0.34, 1.56, 0.64, 1);
+    --transition-base: 0.3s ease;
+    --transition-slow: 0.8s var(--ease-spidey);
+}
+
+/* 1. Global Reset & Base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+    scrollbar-width: none;
+}
+
+html::-webkit-scrollbar {
+    display: none;
+}
+
+body {
+    background-color: var(--clr-dark);
+    color: var(--clr-text);
+    font-family: var(--font-body);
+    line-height: 1.6;
+    overflow-x: hidden;
+    cursor: none;
+    /* Custom cursor */
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+}
+
+/* 2. Background Atmosphere */
+#app-background {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+}
+
+.web-lines {
+    position: absolute;
+    inset: 0;
+    opacity: 0.1;
+    background:
+        repeating-radial-gradient(circle at 10% 10%, transparent 0, transparent 80px, var(--clr-saffron) 81px, transparent 82px),
+        repeating-conic-gradient(from 0deg at 50% 50%, var(--clr-gold) 0deg 0.5deg, transparent 0.5deg 45deg);
+}
+
+.web-overlay {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 50%, transparent 0%, rgba(0, 0, 0, 0.8) 100%);
+    opacity: 0.5;
+}
+
+.skyline {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 25vh;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-around;
+    opacity: 0.3;
+}
+
+.building {
+    width: 45px;
+    background: linear-gradient(to top, var(--clr-teal), transparent);
+    border-top: 2px solid var(--clr-gold);
+    transition: height 1s var(--ease-spidey);
+}
+
+/* 3. Navigation */
+.main-nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 25px 0;
+    z-index: 1000;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), transparent);
+    backdrop-filter: blur(5px);
+}
+
+.main-nav .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 1.5rem;
+    letter-spacing: -1px;
+    color: var(--clr-saffron);
+}
+
+.logo span {
+    color: var(--clr-teal);
+}
+
+.nav-links {
+    display: flex;
+    gap: 10px;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    padding: 5px;
+    border-radius: 50px;
+}
+
+.nav-links a {
+    color: var(--clr-text-dim);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.85rem;
+    padding: 8px 20px;
+    border-radius: 50px;
+    transition: var(--transition-base);
+    text-transform: uppercase;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    color: var(--clr-text);
+    background: var(--clr-red);
+}
+
+.chapter-indicator {
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 0.9rem;
+    color: var(--clr-gold);
+}
+
+/* 4. Section Styling */
+.section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 120px 0;
+    opacity: 1;
+    transform: translateY(0);
+    animation: sectionFadeIn 1s var(--ease-spidey) both;
+}
+
+@keyframes sectionFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* active class is kept only for nav link highlighting */
+.section.active {
+    opacity: 1;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.section-title {
+    font-family: var(--font-heading);
+    font-size: 4rem;
+    font-weight: 800;
+    line-height: 1;
+    margin-bottom: 15px;
+}
+
+.accent {
+    color: var(--clr-saffron);
+    text-shadow: 4px 4px var(--clr-teal);
+}
+
+/* 5. Hero Section */
+.hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 80px;
+    align-items: center;
+}
+
+/* ── 3D Scene ── */
+.profile-3d-scene {
+    position: relative;
+    width: 420px;
+    height: 420px;
+    margin: 0 auto;
+    perspective: 1200px;
+}
+
+.profile-3d-card {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.1s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ── Profile image frame ── */
+.profile-frame {
+    position: relative;
+    width: 280px;
+    height: 280px;
+    z-index: 5;
+}
+
+.profile-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 5px solid rgba(255, 153, 51, 0.6);
+    box-shadow:
+        0 0 30px rgba(255, 153, 51, 0.4),
+        0 0 80px rgba(255, 153, 51, 0.2),
+        0 0 120px rgba(255, 153, 51, 0.1);
+}
+
+/* Pulsing glow behind image */
+.profile-glow {
+    position: absolute;
+    inset: -20px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 153, 51, 0.35) 0%, transparent 70%);
+    animation: glowPulse 2.5s ease-in-out infinite;
+    z-index: -1;
+}
+
+@keyframes glowPulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 0.8;
+    }
+
+    50% {
+        transform: scale(1.2);
+        opacity: 1;
+    }
+}
+
+/* ── Orbital rings ── */
+.orbit {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 1.5px dashed rgba(255, 153, 51, 0.25);
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.orbit-1 {
+    animation: spin 6s linear infinite;
+}
+
+.orbit-2 {
+    animation: spin 10s linear infinite reverse;
+    width: 90%;
+    height: 90%;
+    inset: 5%;
+    border-color: rgba(0, 128, 128, 0.3);
+}
+
+.orbit-3 {
+    animation: spin 15s linear infinite;
+    width: 115%;
+    height: 115%;
+    inset: -7.5%;
+    border-color: rgba(255, 215, 0, 0.2);
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.orbit-dot {
+    display: block;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--clr-saffron);
+    box-shadow: 0 0 10px var(--clr-saffron), 0 0 20px var(--clr-saffron);
+    margin-top: -6px;
+}
+
+.orbit-2 .orbit-dot {
+    background: var(--clr-teal);
+    box-shadow: 0 0 10px var(--clr-teal), 0 0 20px var(--clr-teal);
+}
+
+.orbit-3 .orbit-dot {
+    background: var(--clr-gold);
+    box-shadow: 0 0 10px var(--clr-gold), 0 0 20px var(--clr-gold);
+}
+
+/* ── Web burst lines ── */
+.web-burst {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+}
+
+.web-burst span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 2px;
+    height: 45%;
+    background: linear-gradient(to top, var(--clr-saffron), transparent);
+    transform-origin: bottom center;
+    opacity: 0.15;
+    animation: webPulse 3s ease-in-out infinite;
+}
+
+.web-burst span:nth-child(1) {
+    transform: translateX(-50%) rotate(0deg);
+    animation-delay: 0s;
+}
+
+.web-burst span:nth-child(2) {
+    transform: translateX(-50%) rotate(45deg);
+    animation-delay: 0.3s;
+}
+
+.web-burst span:nth-child(3) {
+    transform: translateX(-50%) rotate(90deg);
+    animation-delay: 0.6s;
+}
+
+.web-burst span:nth-child(4) {
+    transform: translateX(-50%) rotate(135deg);
+    animation-delay: 0.9s;
+}
+
+.web-burst span:nth-child(5) {
+    transform: translateX(-50%) rotate(180deg);
+    animation-delay: 1.2s;
+}
+
+.web-burst span:nth-child(6) {
+    transform: translateX(-50%) rotate(225deg);
+    animation-delay: 1.5s;
+}
+
+.web-burst span:nth-child(7) {
+    transform: translateX(-50%) rotate(270deg);
+    animation-delay: 1.8s;
+}
+
+.web-burst span:nth-child(8) {
+    transform: translateX(-50%) rotate(315deg);
+    animation-delay: 2.1s;
+}
+
+@keyframes webPulse {
+
+    0%,
+    100% {
+        opacity: 0.10;
+        height: 45%;
+    }
+
+    50% {
+        opacity: 0.35;
+        height: 48%;
+    }
+}
+
+/* ── Floating badge (outside card so it's not tilted) ── */
+.floating-badge {
+    position: absolute;
+    bottom: -10px;
+    right: -20px;
+    background: white;
+    padding: 15px 25px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    box-shadow: 10px 10px 0 var(--clr-red);
+    color: black;
+    animation: float 4s ease-in-out infinite;
+    z-index: 20;
+}
+
+.floating-badge .icon {
+    font-size: 2rem;
+}
+
+.badge-text strong {
+    display: block;
+    font-size: 0.9rem;
+}
+
+.badge-text span {
+    font-size: 0.75rem;
+    font-weight: 600;
+    opacity: 0.7;
+}
+
+
+.hero-text .title {
+    font-family: var(--font-heading);
+    font-size: clamp(3rem, 8vw, 6rem);
+    font-weight: 800;
+    line-height: 0.9;
+    margin-bottom: 30px;
+}
+
+.hero-text .subtitle {
+    font-size: 1.25rem;
+    color: var(--clr-text-dim);
+    margin-bottom: 40px;
+    max-width: 500px;
+}
+
+.actions {
+    display: flex;
+    gap: 20px;
+}
+
+.btn {
+    padding: 18px 35px;
+    border-radius: 12px;
+    font-weight: 800;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    transition: var(--transition-base);
+    font-family: var(--font-heading);
+}
+
+.btn.primary {
+    background: var(--clr-saffron);
+    color: white;
+}
+
+.btn.secondary {
+    border: 2px solid var(--clr-gold);
+    color: var(--clr-gold);
+}
+
+.btn:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(255, 153, 51, 0.3);
+}
+
+/* 6. Missions Grid */
+.filter-bar {
+    max-width: 500px;
+    margin: 0 auto 60px;
+    position: relative;
+    z-index: 10;
+}
+
+#mission-search {
+    width: 100%;
+    padding: 20px 30px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--clr-saffron);
+    border-radius: 12px;
+    color: white;
+    font-size: 1.1rem;
+    font-family: var(--font-body);
+    box-shadow: 0 0 20px rgba(255, 153, 51, 0.1);
+    transition: var(--transition-base);
+}
+
+#mission-search:focus {
+    outline: none;
+    background: rgba(255, 153, 51, 0.1);
+    box-shadow: 0 0 30px rgba(255, 153, 51, 0.2);
+}
+
+.mission-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 30px;
+    padding-bottom: 50px;
+}
+
+.mission-card {
+    background: var(--clr-dark-soft);
+    border: 2px solid var(--glass-border);
+    padding: 40px;
+    border-radius: 20px;
+    position: relative;
+    overflow: hidden;
+    transition: 0.5s var(--ease-spidey);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 280px;
+}
+
+.mission-card:hover {
+    border-color: var(--clr-saffron);
+    transform: translateY(-15px) rotate(1deg);
+    background: rgba(255, 153, 51, 0.05);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 153, 51, 0.2);
+}
+
+.mission-card::before {
+    content: '🕸️';
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    font-size: 5rem;
+    opacity: 0.05;
+    transition: 0.5s var(--ease-spidey);
+}
+
+.mission-card:hover::before {
+    opacity: 0.2;
+    transform: rotate(-20deg) scale(1.2);
+}
+
+.num {
+    position: absolute;
+    top: 10px;
+    left: 20px;
+    font-size: 3.5rem;
+    font-weight: 900;
+    font-family: var(--font-heading);
+    opacity: 0.1;
+    color: var(--clr-saffron);
+}
+
+.mission-card h3 {
+    font-family: var(--font-heading);
+    margin: 40px 0 15px;
+    font-size: 1.6rem;
+    color: white;
+    text-transform: uppercase;
+}
+
+.mission-card p {
+    font-size: 0.95rem;
+    color: var(--clr-text-dim);
+    margin-bottom: 30px;
+    line-height: 1.5;
+}
+
+.intel-link {
+    background: var(--clr-saffron);
+    color: white;
+    text-decoration: none;
+    font-weight: 800;
+    padding: 12px 25px;
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-heading);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    transition: var(--transition-base);
+    align-self: flex-start;
+}
+
+.intel-link:hover {
+    background: var(--clr-red);
+    transform: scale(1.05);
+    letter-spacing: 1px;
+}
+
+/* 7. Tech Section */
+.tech-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+}
+
+.tech-card {
+    background: var(--clr-dark-soft);
+    padding: 50px;
+    border-radius: 30px;
+    border: 1px solid var(--glass-border);
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 40px;
+}
+
+.card-header h3 {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+}
+
+.version {
+    font-size: 0.8rem;
+    opacity: 0.5;
+    font-weight: 700;
+}
+
+.skill-item {
+    margin-bottom: 25px;
+}
+
+.skill-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    font-weight: 800;
+    font-size: 0.8rem;
+}
+
+.skill-bar {
+    height: 6px;
+    background: #222;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.skill-fill {
+    height: 100%;
+    background: var(--clr-saffron);
+    border-radius: 3px;
+    width: 0;
+    transition: 1.5s var(--ease-spidey);
+}
+
+.tech-quote {
+    font-size: 2.5rem;
+    font-family: var(--font-heading);
+    font-weight: 800;
+    line-height: 1.2;
+}
+
+.tech-quote p {
+    font-size: 1rem;
+    opacity: 0.5;
+    margin-top: 20px;
+}
+
+/* 8. Contact Section */
+.contact-card {
+    text-align: center;
+    background: linear-gradient(135deg, var(--clr-saffron), var(--clr-red));
+    padding: 100px 50px;
+    border-radius: 40px;
+    color: white;
+}
+
+.contact-card h2 {
+    font-family: var(--font-heading);
+    font-size: 4rem;
+    margin-bottom: 20px;
+}
+
+.contact-email {
+    font-size: 2.5rem;
+    font-family: var(--font-heading);
+    color: white;
+    text-decoration: none;
+    display: block;
+    margin: 40px 0;
+    transition: var(--transition-base);
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
+.social-item {
+    color: white;
+    text-decoration: none;
+    font-weight: 700;
+    opacity: 0.8;
+    transition: var(--transition-base);
+}
+
+.social-item:hover {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+/* 9. UI Fragments — Cursor */
+
+/* Follower ring — glowing web circle with spider icon */
+.cursor-main {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 52px;
+    height: 52px;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-100px, -100px);
+    will-change: transform;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.08s linear;
+}
+
+/* The SVG spider ring rendered inside the follower */
+.cursor-main::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 153, 51, 0.6);
+    box-shadow:
+        0 0 10px rgba(255, 153, 51, 0.5),
+        0 0 25px rgba(255, 153, 51, 0.2),
+        inset 0 0 8px rgba(255, 153, 51, 0.1);
+    animation: cursorRingPulse 2s ease-in-out infinite;
+}
+
+/* Spider logo image inside the cursor ring */
+.cursor-main::after {
+    content: '';
+    display: block;
+    width: 28px;
+    height: 28px;
+    background: url('spider_logo.png.jpg') center/contain no-repeat;
+    filter:
+        sepia(1) saturate(4) hue-rotate(345deg) drop-shadow(0 0 5px rgba(255, 153, 51, 0.9));
+    border-radius: 50%;
+}
+
+@keyframes cursorRingPulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 0.8;
+    }
+
+    50% {
+        transform: scale(1.2);
+        opacity: 1;
+    }
+}
+
+/* hover state — ring expands on interactive elements */
+.cursor-main.cursor-hover {
+    transform: scale(1.6);
+}
+
+.cursor-main.cursor-hover::before {
+    border-color: var(--clr-gold);
+    box-shadow:
+        0 0 20px rgba(255, 215, 0, 0.7),
+        0 0 40px rgba(255, 215, 0, 0.3);
+    animation: none;
+}
+
+/* Tiny web-thread dot at exact cursor position */
+/* .cursor-dot {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 8px;
+    height: 8px;
+    background: var(--clr-gold);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 10000;
+    transform: translate(-100px, -100px);
+    box-shadow: 0 0 4px rgba(255, 215, 0, 0.3);
+    will-change: transform;
+    opacity: 0.3;
+} */
+
+/* Web trail particle */
+.web-trail {
+    position: fixed;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9998;
+    background: var(--clr-saffron);
+    box-shadow: 0 0 6px var(--clr-saffron);
+    animation: trailFade 0.55s ease-out forwards;
+    transform: translate(-50%, -50%);
+}
+
+@keyframes trailFade {
+    0% {
+        opacity: 0.9;
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.1);
+    }
+}
+
+.scroll-progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 4px;
+    background: var(--clr-saffron);
+    z-index: 2000;
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translate(0, 0);
+    }
+
+    50% {
+        transform: translate(10px, -20px);
+    }
+}
+
+/* Glitch Utility */
+.glitch {
+    position: relative;
+}
+
+@keyframes swingIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px) rotate(-3deg);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) rotate(0deg);
+    }
+}
+
+.glitch::before,
+.glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.8;
+}
+
+.glitch::before {
+    color: cyan;
+    z-index: -1;
+    animation: glitch 0.3s infinite;
+    clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+}
+
+.glitch::after {
+    color: magenta;
+    z-index: -2;
+    animation: glitch 0.3s infinite reverse;
+    clip-path: polygon(0 80%, 100% 20%, 100% 100%, 0 100%);
+}
+
+@keyframes glitch {
+    0% {
+        transform: translate(0);
+    }
+
+    20% {
+        transform: translate(-2px, 2px);
+    }
+
+    40% {
+        transform: translate(-2px, -2px);
+    }
+
+    100% {
+        transform: translate(0);
+    }
+}
+
+/* ================================================
+   10. HAMBURGER & MOBILE NAV DRAWER
+   ================================================ */
+
+.hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    z-index: 1100;
+}
+
+.hamburger span {
+    display: block;
+    width: 26px;
+    height: 2px;
+    background: var(--clr-saffron);
+    border-radius: 2px;
+    transition: var(--transition-base);
+}
+
+.hamburger.open span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+
+.hamburger.open span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.open span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+}
+
+/* Full-screen mobile nav overlay */
+.mobile-nav-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(7, 7, 7, 0.97);
+    backdrop-filter: blur(16px);
+    z-index: 1050;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-20px);
+    transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.mobile-nav-overlay.open {
+    opacity: 1;
+    pointer-events: all;
+    transform: translateY(0);
+}
+
+.mobile-nav-close {
+    position: absolute;
+    top: 28px;
+    right: 28px;
+    background: none;
+    border: none;
+    color: var(--clr-text-dim);
+    font-size: 1.8rem;
+    cursor: pointer;
+    transition: color var(--transition-base);
+}
+
+.mobile-nav-close:hover {
+    color: var(--clr-saffron);
+}
+
+.mobile-nav-links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+}
+
+.mobile-nav-links a {
+    font-family: var(--font-heading);
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--clr-text-dim);
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: color var(--transition-base);
+}
+
+.mobile-nav-links a:hover {
+    color: var(--clr-saffron);
+}
+
+/* ================================================
+   11. RESPONSIVE BREAKPOINTS
+   ================================================ */
+
+/* --- Large Tablets (1024px) --- */
+@media (max-width: 1024px) {
+    .container {
+        padding: 0 30px;
+    }
+
+    .hero-grid,
+    .tech-grid {
+        grid-template-columns: 1fr;
+        gap: 50px;
+        text-align: center;
+    }
+
+    .hero-visual {
+        order: -1;
+    }
+
+    .hero-text .subtitle {
+        margin: 0 auto 40px;
+    }
+
+    .actions {
+        justify-content: center;
+    }
+
+    .tech-quote {
+        font-size: 1.8rem;
+        text-align: center;
+    }
+
+    .profile-3d-scene {
+        width: 360px;
+        height: 360px;
+    }
+
+    .floating-badge {
+        right: 0;
+        bottom: -20px;
+    }
+}
+
+/* --- Tablets / Large Phones (768px) --- */
+@media (max-width: 768px) {
+    body {
+        cursor: auto;
+    }
+
+    .cursor-main,
+    .cursor-dot {
+        display: none;
+    }
+
+    /* Show hamburger, hide desktop links */
+    .hamburger {
+        display: flex;
+    }
+
+    .nav-links {
+        display: none;
+    }
+
+    .chapter-indicator {
+        display: none;
+    }
+
+    .main-nav {
+        padding: 18px 0;
+    }
+
+    /* Sections */
+    .section {
+        padding: 100px 0 60px;
+        min-height: auto;
+    }
+
+    .section-header {
+        margin-bottom: 40px;
+    }
+
+    .section-title {
+        font-size: 2.4rem;
+    }
+
+    /* Hero */
+    .hero-grid {
+        gap: 40px;
+    }
+
+    .hero-text .title {
+        font-size: clamp(2.4rem, 9vw, 3.5rem);
+    }
+
+    .hero-text .subtitle {
+        font-size: 1.05rem;
+    }
+
+    .actions {
+        flex-wrap: wrap;
+        gap: 14px;
+    }
+
+    .btn {
+        padding: 14px 28px;
+        font-size: 0.85rem;
+    }
+
+    /* Profile scene */
+    .profile-3d-scene {
+        width: 300px;
+        height: 300px;
+    }
+
+    .profile-frame {
+        width: 210px;
+        height: 210px;
+    }
+
+    /* Floating badge – pull it back inside the card */
+    .floating-badge {
+        right: 50%;
+        transform: translateX(50%);
+        bottom: -50px;
+        animation: none;
+        position: absolute;
+        white-space: nowrap;
+    }
+
+    /* Mission cards */
+    .mission-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .mission-card {
+        padding: 30px;
+        min-height: auto;
+    }
+
+    /* Tech section */
+    .tech-grid {
+        gap: 30px;
+    }
+
+    .tech-card {
+        padding: 30px;
+    }
+
+    .card-header h3 {
+        font-size: 1.5rem;
+    }
+
+    .tech-quote {
+        font-size: 1.5rem;
+    }
+
+    /* Contact section */
+    .contact-card {
+        padding: 60px 25px;
+        border-radius: 24px;
+    }
+
+    .contact-card h2 {
+        font-size: 2.5rem;
+    }
+
+    .contact-email {
+        font-size: 1.2rem;
+        word-break: break-all;
+        margin: 25px 0;
+    }
+
+    .social-links {
+        gap: 18px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}
+
+/* --- Small Phones (480px) --- */
+@media (max-width: 480px) {
+    .container {
+        padding: 0 18px;
+    }
+
+    .logo {
+        font-size: 1.2rem;
+    }
+
+    .section {
+        padding: 90px 0 50px;
+    }
+
+    .section-title {
+        font-size: 2rem;
+    }
+
+    /* Hero */
+    .hero-text .title {
+        font-size: clamp(2rem, 10vw, 2.8rem);
+    }
+
+    .hero-text .subtitle {
+        font-size: 0.95rem;
+    }
+
+    .actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .btn {
+        text-align: center;
+        padding: 14px 20px;
+    }
+
+    /* Profile */
+    .profile-3d-scene {
+        width: 260px;
+        height: 260px;
+    }
+
+    .profile-frame {
+        width: 180px;
+        height: 180px;
+    }
+
+    .floating-badge {
+        padding: 10px 16px;
+        gap: 10px;
+    }
+
+    .floating-badge .icon {
+        font-size: 1.5rem;
+    }
+
+    /* Mission cards */
+    .mission-card {
+        padding: 24px 20px;
+    }
+
+    .mission-card h3 {
+        font-size: 1.3rem;
+    }
+
+    /* Tech */
+    .tech-card {
+        padding: 22px;
+    }
+
+    .tech-quote {
+        font-size: 1.2rem;
+    }
+
+    /* Contact */
+    .contact-card {
+        padding: 45px 18px;
+    }
+
+    .contact-card h2 {
+        font-size: 2rem;
+    }
+
+    .contact-email {
+        font-size: 1rem;
+    }
+
+    /* Filter bar */
+    #mission-search {
+        padding: 14px 18px;
+        font-size: 0.95rem;
+    }
+}
+
+/* =============================================
+   10. Credentials / Certifications Section
+   ============================================= */
+.credentials-section {
+    min-height: 100vh;
+    padding: 120px 0;
+}
+
+.cred-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 40px;
+    perspective: 1200px;
+}
+
+/* --- Flip Card Shell --- */
+.cred-card {
+    height: 380px;
+    perspective: 1200px;
+    cursor: pointer;
+}
+
+.cred-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.75s cubic-bezier(0.34, 1.56, 0.64, 1);
+    border-radius: 20px;
+}
+
+.cred-card:hover .cred-inner {
+    transform: rotateY(180deg);
+}
+
+/* --- Front Face --- */
+.cred-front,
+.cred-back {
+    position: absolute;
+    inset: 0;
+    border-radius: 20px;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    overflow: hidden;
+}
+
+.cred-front {
+    background: var(--clr-dark-soft);
+    border: 1px solid var(--glass-border);
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    padding: 0;
+    overflow: hidden;
+}
+
+/* Animated hologram shimmer on front */
+.cred-hologram {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg,
+            transparent 40%,
+            rgba(255, 153, 51, 0.06) 50%,
+            transparent 60%);
+    background-size: 400% 400%;
+    animation: hologramShift 4s ease-in-out infinite;
+    pointer-events: none;
+}
+
+@keyframes hologramShift {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.cred-img {
+    width: 100%;
+    flex: 1;
+    object-fit: contain;
+    object-position: center;
+    background: #ffffff;
+    padding: 12px;
+    opacity: 1;
+    transition: transform 0.3s ease;
+    border-radius: 20px 20px 0 0;
+    display: block;
+    min-height: 0;
+}
+
+.cred-card:hover .cred-img {
+    transform: scale(1.03);
+}
+
+.cred-label {
+    position: relative;
+    z-index: 5;
+    background: rgba(7, 7, 7, 0.92);
+    border-top: 2px solid rgba(255, 153, 51, 0.4);
+    border-radius: 0 0 20px 20px;
+    padding: 14px 18px;
+    width: 100%;
+    text-align: left;
+    flex-shrink: 0;
+}
+
+.cred-label h3 {
+    font-family: var(--font-heading);
+    font-size: 0.95rem;
+    font-weight: 800;
+    color: var(--clr-text);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.cred-label p {
+    font-size: 0.78rem;
+    color: var(--clr-saffron);
+    font-weight: 600;
+}
+
+.flip-hint {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    z-index: 5;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--clr-gold);
+    opacity: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: opacity 0.3s ease;
+}
+
+.cred-card:hover .flip-hint {
+    opacity: 1;
+}
+
+/* --- Back Face --- */
+.cred-back {
+    background: linear-gradient(145deg, #0a0a0a, #161616);
+    border: 1px solid rgba(255, 153, 51, 0.4);
+    transform: rotateY(180deg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    padding: 30px;
+    text-align: center;
+    box-shadow: inset 0 0 60px rgba(255, 153, 51, 0.05);
+}
+
+/* Radial glow on back */
+.cred-back-glow {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 153, 51, 0.2), transparent 70%);
+    animation: glowPulse 2.5s ease-in-out infinite;
+    pointer-events: none;
+}
+
+.badge-img {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    border-radius: 50%;
+    border: 3px solid var(--clr-saffron);
+    box-shadow: 0 0 20px rgba(255, 153, 51, 0.5);
+    position: relative;
+    z-index: 2;
+}
+
+.cred-back h3 {
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--clr-text);
+    text-transform: uppercase;
+    position: relative;
+    z-index: 2;
+}
+
+.cred-id {
+    font-size: 0.85rem;
+    color: var(--clr-text-dim);
+    position: relative;
+    z-index: 2;
+}
+
+.verify-btn {
+    display: inline-block;
+    background: var(--clr-saffron);
+    color: white;
+    text-decoration: none;
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    padding: 12px 24px;
+    border-radius: 8px;
+    position: relative;
+    z-index: 2;
+    transition: background 0.3s ease, transform 0.2s ease;
+    letter-spacing: 0.05em;
+}
+
+.verify-btn:hover {
+    background: var(--clr-red);
+    transform: scale(1.05);
+}
+
+/* Responsive: stack to single column on mobile */
+@media (max-width: 600px) {
+    .cred-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .cred-card {
+        height: 340px;
+    }
+}
