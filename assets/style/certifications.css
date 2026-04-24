@@ -38,7 +38,7 @@ body {
     height: 100%;
     z-index: -1;
     background: radial-gradient(circle at 50% 50%, rgba(112, 0, 255, 0.1), transparent 50%),
-                radial-gradient(circle at 10% 10%, rgba(0, 242, 255, 0.05), transparent 30%);
+        radial-gradient(circle at 10% 10%, rgba(0, 242, 255, 0.05), transparent 30%);
 }
 
 .navbar {
@@ -83,7 +83,8 @@ body {
 }
 
 /* Custom Cursor */
-.cursor-dot, .cursor-outline {
+.cursor-dot,
+.cursor-outline {
     position: fixed;
     top: 0;
     left: 0;
@@ -148,7 +149,8 @@ body {
 }
 
 .gallery-item {
-    flex: 0 0 350px; /* Fixed width for horizontal scroll */
+    flex: 0 0 350px;
+    /* Fixed width for horizontal scroll */
     cursor: pointer;
     transition: opacity 0.4s ease;
     scroll-snap-align: center;
@@ -157,9 +159,9 @@ body {
     will-change: transform, opacity;
 }
 
-.gallery-item:hover, 
+.gallery-item:hover,
 .gallery-item.active-hover {
-    transform: perspective(1000px) rotateY(0deg) translateZ(100px) scale(1.1) translateY(-20px);
+    transform: perspective(1000px) rotateY(var(--scroll-rotation, 0deg)) translateZ(calc(var(--scroll-depth, 0px) + 50px)) scale(1.1) translateY(-20px);
     z-index: 100;
 }
 
@@ -214,7 +216,7 @@ body {
     font-weight: 500;
 }
 
-[data-theme="light"] .page-title, 
+[data-theme="light"] .page-title,
 [data-theme="light"] .back-link,
 [data-theme="light"] .theme-toggle {
     color: #000000 !important;
@@ -229,25 +231,32 @@ body {
 .item-inner img {
     width: 100%;
     height: 250px;
-    object-fit: cover; /* Cropped view by default */
+    object-fit: cover;
+    /* Cropped view by default */
     border-radius: 15px;
     transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
     filter: grayscale(0.2);
     position: relative;
     z-index: 1;
-    transform-origin: top center; /* Scale from the top to prevent clipping issues */
+    transform-origin: top center;
+    /* Scale from the top to prevent clipping issues */
 }
 
 .gallery-item:hover img,
 .gallery-item.active-hover img {
     height: auto;
-    max-height: 600px;
-    object-fit: contain; /* Show full image */
-    transform: rotateY(0deg) scale(1.5) translateY(-15px); /* Forced straight with 1.5x scale */
+    max-height: 400px;
+    /* Subtle pop-out size */
+    width: auto;
+    max-width: 90vw;
+    object-fit: contain;
+    transform: scale(1.15) translateY(-5px);
+    /* Very subtle 1.15x scale */
     filter: grayscale(0);
-    box-shadow: 0 40px 100px rgba(0, 0, 0, 1), 0 0 60px rgba(112, 0, 255, 0.6);
-    z-index: 500;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 1), 0 0 40px rgba(112, 0, 255, 0.4);
+    z-index: 999;
     background: var(--bg);
+    border: 2px solid var(--accent-light);
 }
 
 .item-info {
@@ -312,49 +321,46 @@ body {
     cursor: pointer;
 }
 
-@media (max-width: 768px) {
-    .navbar {
-        padding: 20px 5%;
-    }
-
-    .gallery-item {
-        flex: 0 0 280px; /* Narrower items on mobile */
-    }
-
-    /* Original hovering movement for mobile/touch - triggered by .active-hover toggle */
-    .gallery-item:hover,
-    .gallery-item.active-hover {
-        transform: perspective(1000px) rotateY(0deg) scale(1.1) translateY(-15px);
-        z-index: 100;
-    }
-    
-    .gallery-item:hover img,
-    .gallery-item.active-hover img {
-        transform: scale(1.4) translateY(-10px);
-        height: auto;
-        max-height: 450px;
-        object-fit: contain;
-    }
-
-    .item-inner img {
-        height: 220px;
-    }
-
-    .close-lightbox {
-        right: 20px;
-        top: 20px;
-    }
+.gallery-item {
+    flex: 0 0 280px;
+    /* Narrower items on mobile */
 }
+
+/* Original hovering movement for mobile/touch - triggered by .active-hover toggle */
+.gallery-item:hover,
+.gallery-item.active-hover {
+    transform: perspective(1000px) rotateY(var(--scroll-rotation, 0deg)) scale(1.05) translateY(-15px);
+    z-index: 100;
+}
+
+.gallery-item:hover img,
+.gallery-item.active-hover img {
+    transform: scale(1.1);
+    height: auto;
+    max-height: 400px;
+    object-fit: contain;
+}
+
+.item-inner img {
+    height: 220px;
+}
+
+.close-lightbox {
+    right: 20px;
+    top: 20px;
+}
+
 
 @media (max-width: 480px) {
     .page-title {
-        display: none; /* Hide title if too crowded */
+        display: none;
+        /* Hide title if too crowded */
     }
-    
+
     .item-info {
         padding: 15px;
     }
-    
+
     .item-info h3 {
         font-size: 1rem;
     }
