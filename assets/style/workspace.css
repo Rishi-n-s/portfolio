@@ -1,0 +1,320 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap');
+
+:root {
+    --accent: #00f2ff;
+    --accent-alt: #7000ff;
+    --text: #ffffff;
+    --bg: #000000;
+}
+
+* {
+    margin: 0; padding: 0; box-sizing: border-box;
+    font-family: 'Outfit', sans-serif;
+}
+
+body {
+    background-color: var(--bg);
+    color: var(--text);
+    overflow: hidden;
+    position: fixed; /* Prevent scrolling on iOS */
+    width: 100%;
+    height: 100%;
+    touch-action: none; /* Prevent browser gestures */
+    user-select: none;
+}
+
+canvas {
+    display: block;
+}
+
+#ui-container {
+    position: absolute; inset: 0; z-index: 10;
+    pointer-events: none;
+}
+
+/* HUD */
+.hud-top {
+    position: absolute; top: 40px; left: 40px;
+    border-left: 2px solid var(--accent);
+    padding-left: 20px;
+}
+
+.hud-top h1 {
+    font-size: 1.5rem; font-weight: 800; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--accent);
+}
+
+.hud-top p {
+    font-size: 0.7rem; letter-spacing: 0.4em;
+    text-transform: uppercase; color: rgba(255,255,255,0.4);
+}
+
+.hud-top-right {
+    position: absolute; top: 40px; right: 40px;
+    pointer-events: auto;
+}
+
+.back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 24px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.05);
+    color: #fff;
+    text-decoration: none;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    border-radius: 8px;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.back-btn i {
+    font-size: 0.9rem;
+    transition: transform 0.3s ease;
+}
+
+.back-btn:hover {
+    background: var(--accent);
+    color: #000;
+    border-color: var(--accent);
+    box-shadow: 0 0 30px rgba(0, 242, 255, 0.4);
+}
+
+.back-btn:hover i {
+    transform: translateX(-5px);
+}
+
+/* Instructions */
+.instructions {
+    position: absolute; bottom: 40px; left: 40px;
+    color: rgba(255,255,255,0.5); font-size: 0.7rem;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    display: flex; flex-direction: column; gap: 10px;
+}
+
+.instructions span b { color: var(--accent); }
+
+/* Crosshair */
+#crosshair {
+    position: absolute; top: 50%; left: 50%;
+    width: 40px; height: 40px;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+}
+
+#crosshair::before, #crosshair::after {
+    content: ''; position: absolute;
+    background: var(--accent); opacity: 0.5;
+}
+
+#crosshair::before { width: 1px; height: 100%; left: 50%; }
+#crosshair::after { height: 1px; width: 100%; top: 50%; }
+
+/* Planet Info - Glassmorphism */
+#planet-info {
+    position: absolute; bottom: 10%; right: 5%;
+    width: 380px; padding: 40px;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(30px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    opacity: 0; transform: translateX(50px);
+    transition: all 0.6s cubic-bezier(0.2, 1, 0.3, 1);
+    pointer-events: none;
+}
+
+#planet-info.active {
+    opacity: 1; transform: translateX(0);
+    pointer-events: auto;
+}
+
+#info-category {
+    font-size: 0.65rem; color: var(--accent);
+    letter-spacing: 0.4em; text-transform: uppercase;
+    margin-bottom: 10px; font-weight: 600;
+}
+
+#info-title {
+    font-size: 2.5rem; font-weight: 800; line-height: 1;
+    margin-bottom: 20px; color: #fff;
+}
+
+#info-desc {
+    font-size: 0.9rem; line-height: 1.7; color: rgba(255,255,255,0.7);
+    margin-bottom: 30px; font-weight: 300;
+}
+
+.enter-btn {
+    display: flex; align-items: center; justify-content: center;
+    width: 100%; padding: 18px;
+    background: var(--accent); color: #000;
+    text-decoration: none; font-size: 0.8rem; font-weight: 800;
+    text-transform: uppercase; letter-spacing: 0.2em;
+    border-radius: 12px; transition: all 0.3s;
+}
+
+.enter-btn:hover {
+    background: #fff; transform: scale(1.02);
+    box-shadow: 0 10px 30px rgba(0, 242, 255, 0.4);
+}
+
+/* Loading Overlay */
+#loading {
+    position: fixed; inset: 0; z-index: 1000;
+    background: #000; display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    transition: opacity 1s ease;
+}
+
+.warp-loader {
+    width: 200px; height: 2px;
+    background: rgba(255,255,255,0.1);
+    position: relative; overflow: hidden;
+}
+
+.warp-loader::after {
+    content: ''; position: absolute; left: -100%;
+    width: 100%; height: 100%;
+    background: var(--accent);
+    animation: warp 1.5s ease-in-out infinite;
+}
+
+@keyframes warp { 100% { left: 100%; } }
+
+#loading p {
+    margin-top: 30px; font-size: 0.7rem; letter-spacing: 0.5em;
+    text-transform: uppercase; color: var(--accent);
+}
+/* Responsive Design for Workspace */
+@media (max-width: 992px) {
+    .hud-top { top: 20px; left: 20px; }
+    .hud-top-right { top: 20px; right: 20px; }
+    #planet-info {
+        width: 90%;
+        bottom: 5%;
+        right: 5%;
+        padding: 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    .hud-top h1 { font-size: 1.2rem; }
+    .hud-top p { font-size: 0.6rem; letter-spacing: 0.2em; }
+    
+    .back-btn {
+        padding: 10px 15px;
+        font-size: 0.65rem;
+    }
+
+    #planet-info {
+        padding: 25px;
+        top: 50%;
+        left: 50%;
+        bottom: auto;
+        right: auto;
+        transform: translate(-50%, -50%) scale(0.9);
+        width: 85%;
+        max-width: 340px;
+        text-align: center;
+    }
+
+    #planet-info.active {
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    #info-title { font-size: 1.8rem; }
+    #info-desc { font-size: 0.8rem; margin-bottom: 20px; }
+    
+    .instructions {
+        display: none; /* Hide complex instructions on mobile */
+    }
+
+    #crosshair {
+        width: 30px; height: 30px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hud-top { padding-left: 10px; }
+    .back-btn span { display: none; } /* Show only icon on very small screens if text is long */
+    
+    #planet-info {
+        padding: 15px;
+    }
+    
+    #info-title { font-size: 1.5rem; }
+}
+
+/* Gyro Button */
+.gyro-btn {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 15px 30px;
+    background: rgba(112, 0, 255, 0.2);
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    backdrop-filter: blur(10px);
+    display: none; /* Hidden on desktop */
+    align-items: center;
+    gap: 10px;
+    pointer-events: auto;
+    z-index: 100;
+    transition: all 0.3s;
+}
+
+.gyro-btn.active {
+    background: var(--accent);
+    color: #000;
+}
+
+@media (max-width: 992px) {
+    .gyro-btn {
+        display: flex;
+    }
+}
+
+/* Joystick */
+#joystick-container {
+    position: absolute;
+    bottom: 40px;
+    left: 40px;
+    width: 120px;
+    height: 120px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(0, 242, 255, 0.2);
+    border-radius: 50%;
+    backdrop-filter: blur(10px);
+    display: none; /* Only on mobile */
+    pointer-events: auto;
+    z-index: 100;
+}
+
+#joystick-handle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 50px;
+    height: 50px;
+    background: var(--accent);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 20px rgba(0, 242, 255, 0.4);
+    pointer-events: none;
+}
+
+@media (max-width: 992px) {
+    #joystick-container {
+        display: block;
+    }
+}

@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certification Gallery | Rishi Solanki</title>
+    <link rel="stylesheet" href="../style/certifications.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="background-mesh"></div>
+    
+    <nav class="navbar">
+        <a href="../../index.html" class="back-link"><i class="fas fa-arrow-left"></i> <span>Back to Portfolio</span></a>
+        <h1 class="page-title">Achievement <span class="highlight">Gallery</span></h1>
+        <div class="nav-controls">
+            <button id="themeToggle" class="theme-toggle" aria-label="Toggle Theme">
+                <i class="fas fa-sun"></i>
+            </button>
+        </div>
+    </nav>
+
+    <main class="gallery-container">
+        <div class="gallery-grid">
+            <!-- Kaggle -->
+            <div class="gallery-item" data-tilt>
+                <div class="item-inner">
+                    <img src="../images/Kaggle Community Member.png" alt="Kaggle Community Member">
+                    <div class="item-info">
+                        <h3>Kaggle Community Member</h3>
+                        <p>Data Science & Machine Learning</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Python Coder -->
+            <div class="gallery-item" data-tilt>
+                <div class="item-inner">
+                    <img src="../images/Python Coder (1).png" alt="Python Coder">
+                    <div class="item-info">
+                        <h3>Python Coder</h3>
+                        <p>Advanced Python Programming</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Google Analytics -->
+            <div class="gallery-item" data-tilt>
+                <div class="item-inner">
+                    <img src="../images/google analystic.png" alt="Google Analytics">
+                    <div class="item-info">
+                        <h3>Google Analytics</h3>
+                        <p>Digital Marketing & Data Analysis</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Analytic Badge -->
+            <div class="gallery-item" data-tilt>
+                <div class="item-inner">
+                    <img src="../images/analystic badge.png" alt="Analytic Badge">
+                    <div class="item-info">
+                        <h3>Data Analytics Badge</h3>
+                        <p>Specialized Data Processing</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Play Store Listing -->
+            <div class="gallery-item" data-tilt>
+                <div class="item-inner">
+                    <img src="../images/google palay store listing.png" alt="Google Play Store Listing">
+                    <div class="item-info">
+                        <h3>Play Store Listing</h3>
+                        <p>Mobile App Deployment</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Member Badge -->
+            <div class="gallery-item" data-tilt>
+                <div class="item-inner">
+                    <img src="../images/member badge.jpg" alt="Member Badge">
+                    <div class="item-info">
+                        <h3>Professional Member</h3>
+                        <p>Verified Membership</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Python Badge -->
+            <div class="gallery-item" data-tilt>
+                <div class="item-inner">
+                    <img src="../images/python badge.jpg" alt="Python Badge">
+                    <div class="item-info">
+                        <h3>Python Specialist</h3>
+                        <p>Core Language Mastery</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ambassador Certificate -->
+            <div class="gallery-item" data-tilt>
+                <div class="item-inner">
+                    <img src="../images/ambassador certificate.jpg" alt="Ambassador Certificate">
+                    <div class="item-info">
+                        <h3>Ambassador Certificate</h3>
+                        <p>Community Outreach & Leadership</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="lightbox" class="lightbox">
+        <span class="close-lightbox">&times;</span>
+        <img class="lightbox-content" id="lightbox-img">
+        <div id="caption"></div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
+    <script>
+        // Initialize Tilt with Gyro support
+        VanillaTilt.init(document.querySelectorAll("[data-tilt]"), {
+            max: 0, // Disable mouse-hover tilt
+            speed: 400,
+            glare: true,
+            "max-glare": 0.3,
+            gyroscope: true, // Keep gyro for mobile
+            gyroscopeMinAngleX: -45,
+            gyroscopeMaxAngleX: 45,
+            gyroscopeMinAngleY: -45,
+            gyroscopeMaxAngleY: 45,
+        });
+
+        // Motion Permission for iOS
+        window.addEventListener('click', function() {
+            if (typeof DeviceOrientationEvent.requestPermission === 'function') {
+                DeviceOrientationEvent.requestPermission()
+                    .then(permissionState => {
+                        if (permissionState === 'granted') {
+                            console.log("Motion permission granted");
+                        }
+                    })
+                    .catch(console.error);
+            }
+        }, { once: true });
+
+        // 3D Cover Flow Effect
+        const grid = document.querySelector('.gallery-grid');
+        const scrollItems = document.querySelectorAll('.gallery-item');
+
+        function update3D() {
+            const centerX = grid.offsetWidth / 2;
+            
+            scrollItems.forEach(item => {
+                const rect = item.getBoundingClientRect();
+                const itemCenter = rect.left + rect.width / 2;
+                const distanceFromCenter = itemCenter - centerX;
+                
+                // Calculate rotation based on distance
+                const maxRotation = 35; // degrees
+                const rotation = (distanceFromCenter / centerX) * maxRotation;
+                const clampedRotation = Math.max(-maxRotation, Math.min(maxRotation, rotation));
+                
+                // Base 3D rotation and sliding from scroll
+                const zTranslation = -Math.abs(distanceFromCenter / 1.5);
+                item.style.setProperty('--scroll-rotation', `${-clampedRotation}deg`);
+                item.style.setProperty('--scroll-depth', `${zTranslation}px`);
+                
+                // Adjust opacity for items further away
+                const opacity = 1 - Math.abs(clampedRotation) / 100;
+                item.style.opacity = Math.max(0.4, opacity);
+            });
+            
+            requestAnimationFrame(update3D);
+        }
+
+        update3D();
+
+        // Mobile Click-to-Toggle Hover
+        const items = document.querySelectorAll('.gallery-item');
+        items.forEach(item => {
+            item.addEventListener('click', function(e) {
+                // Prevent interfering with the lightbox if the image itself is clicked
+                // (though the image click is handled below, we want the toggle logic to run)
+                
+                const isActive = this.classList.contains('active-hover');
+                
+                // Remove active-hover from all other items
+                items.forEach(i => i.classList.remove('active-hover'));
+                
+                // Toggle active-hover on this item
+                if (!isActive) {
+                    this.classList.add('active-hover');
+                }
+            });
+        });
+
+        // Lightbox Logic
+        const lightbox = document.getElementById("lightbox");
+        const lightboxImg = document.getElementById("lightbox-img");
+        const captionText = document.getElementById("caption");
+        const closeBtn = document.querySelector(".close-lightbox");
+
+        document.querySelectorAll(".item-inner img").forEach(img => {
+            img.onclick = function() {
+                lightbox.style.display = "flex";
+                lightboxImg.src = this.src;
+                captionText.innerHTML = this.alt;
+            }
+        });
+
+        closeBtn.onclick = function() {
+            lightbox.style.display = "none";
+        }
+
+        lightbox.onclick = function(e) {
+            if (e.target === lightbox) {
+                lightbox.style.display = "none";
+            }
+        }
+    </script>
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+    <script src="../js/script.js"></script>
+</body>
+</html>

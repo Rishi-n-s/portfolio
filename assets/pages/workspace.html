@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interstellar Workspace | Rishi Solanki</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../style/workspace.css">
+</head>
+<body>
+    <div id="loading">
+        <div class="warp-loader"></div>
+        <p>Engaging Warp Drive...</p>
+    </div>
+
+    <div id="ui-container">
+        <div class="hud-top">
+            <h1>Deep Space</h1>
+            <p>Pilot Status: Free Flight</p>
+        </div>
+
+        <div class="hud-top-right">
+            <a href="../../index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Back to Portfolio</a>
+        </div>
+
+        <div id="crosshair"></div>
+
+        <div id="planet-info">
+            <p id="info-category">Planet Type</p>
+            <h2 id="info-title">Planet Name</h2>
+            <p id="info-desc">Anomaly Detected.</p>
+            <a id="info-link" href="#" target="_blank" class="enter-btn">Land on Planet</a>
+        </div>
+
+        <div class="instructions">
+            <span><b>W/A/S/D</b> - Thrusters</span>
+            <span><b>MOUSE</b> - Flight Path</span>
+            <span><b>CLICK</b> - Inspect Planet</span>
+        </div>
+
+        <div id="joystick-container">
+            <div id="joystick-handle"></div>
+        </div>
+    </div>
+
+    <script async src="https://unpkg.com/es-module-shims@1.6.3/dist/es-module-shims.js"></script>
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.150.1/build/three.module.js",
+                "three/addons/": "https://unpkg.com/three@0.150.1/examples/jsm/"
+            }
+        }
+    </script>
+    <script type="module" src="../js/workspace.js"></script>
+</body>
+</html>
