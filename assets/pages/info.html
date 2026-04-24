@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Information | Rishi Solanki</title>
+    <link rel="stylesheet" href="../style/info.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="background-mesh"></div>
+
+    <nav class="navbar">
+        <a href="../../index.html" class="back-link"><i class="fas fa-arrow-left"></i> <span>Back</span></a>
+        <h1 class="page-title">Personal <span class="highlight">Insights</span></h1>
+        <div class="nav-controls">
+            <button id="themeToggle" class="theme-toggle" aria-label="Toggle Theme"
+                style="background: none; border: none; cursor: pointer; color: inherit; font-size: 1.2rem;">
+                <i class="fas fa-sun"></i>
+            </button>
+        </div>
+    </nav>
+
+    <main class="info-container">
+        <div class="bento-grid">
+            <!-- Profile Section -->
+            <div class="bento-item item-profile" data-tilt>
+                <div class="profile-visual">
+                    <img src="../images/profile.jpeg" alt="Rishi Solanki">
+                </div>
+                <div class="profile-info">
+                    <div class="item-header">
+                        <i class="fas fa-user"></i>
+                        <h3>The Developer</h3>
+                    </div>
+                    <h2>Rishi N Solanki</h2>
+                    <p>A creative developer dedicated to building immersive digital worlds. I blend technical precision
+                        with artistic vision to create experiences that resonate.</p>
+                </div>
+            </div>
+
+            <!-- Experience -->
+            <div class="bento-item item-experience" data-tilt>
+                <div class="item-header">
+                    <i class="fas fa-briefcase"></i>
+                    <h3>Journey</h3>
+                </div>
+                <div class="stat-number">3+</div>
+                <div class="stat-label">Years of<br>Creating</div>
+                <p style="margin-top: 15px; opacity: 0.7; font-size: 0.9rem;">From design to deployment, every pixel
+                    tells a story.</p>
+            </div>
+
+            <!-- Tech Stack -->
+            <div class="bento-item item-tech" data-tilt>
+                <div class="item-header">
+                    <i class="fas fa-code"></i>
+                    <h3>Toolbox</h3>
+                </div>
+                <div class="tech-tags">
+                    <span class="tech-tag">React</span>
+                    <span class="tech-tag">Three.js</span>
+                    <span class="tech-tag">Next.js</span>
+                    <span class="tech-tag">TypeScript</span>
+                    <span class="tech-tag">Node.js</span>
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">GSAP</span>
+                    <span class="tech-tag">Tailwind</span>
+                </div>
+            </div>
+
+            <!-- Philosophy/Quote -->
+            <div class="bento-item item-quote" data-tilt>
+                <blockquote>
+                   jack of all trades and a master of none but sometimes better than master of one
+            </div>
+
+            <!-- Location -->
+            <div class="bento-item item-location" data-tilt>
+                <div class="item-header">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <h3>Base</h3>
+                </div>
+                <div class="location-content">
+                    <div class="location-icon"><i class="fas fa-globe-americas"></i></div>
+                    <p>Available for projects<br><strong>Worldwide</strong></p>
+                </div>
+            </div>
+
+            <!-- Education -->
+            <div class="bento-item item-edu" data-tilt>
+                <div class="item-header">
+                    <i class="fas fa-graduation-cap"></i>
+                    <h3>Education</h3>
+                </div>
+                <div class="edu-item">
+                    <h4>Self-Taught Developer</h4>
+                    <p>Continuous learning through real-world projects and technical research.</p>
+                </div>
+            </div>
+
+            <!-- Availability -->
+            <div class="bento-item item-availability" data-tilt>
+                <div class="item-header">
+                    <i class="fas fa-circle-check"></i>
+                    <h3>Status</h3>
+                </div>
+                <div class="status-indicator">
+                    <div class="dot"></div>
+                    <p>Open for Work</p>
+                </div>
+                <p style="margin-top: 10px; opacity: 0.6; font-size: 0.8rem;">Ready for the next big challenge.</p>
+            </div>
+
+            <!-- Social Connect -->
+            <div class="bento-item item-social" data-tilt>
+                <div class="item-header">
+                    <i class="fas fa-share-nodes"></i>
+                    <h3>Connect</h3>
+                </div>
+                <div class="social-links-grid">
+                    <a href="#" class="social-btn github">
+                        <i class="fab fa-github"></i> GitHub
+                    </a>
+                    <a href="#" class="social-btn linkedin">
+                        <i class="fab fa-linkedin"></i> LinkedIn
+                    </a>
+                    <a href="#" class="social-btn twitter">
+                        <i class="fab fa-instagram"></i> Instagram
+                    </a>
+                    <a href="#" class="social-btn email">
+                        <i class="fas fa-envelope"></i> Email
+                    </a>
+                </div>
+            </div>
+
+            <!-- Interests -->
+            <div class="bento-item item-interests" data-tilt>
+                <div class="item-header">
+                    <i class="fas fa-heart"></i>
+                    <h3>Passions</h3>
+                </div>
+                <ul class="interests-list">
+                    <li><i class="fas fa-camera"></i> Photography</li>
+                    <li><i class="fas fa-mountain"></i> Hiking</li>
+                    <li><i class="fas fa-gamepad"></i> Gaming</li>
+                </ul>
+            </div>
+        </div>
+    </main>
+
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
+    <script>
+        // Initialize Tilt
+        VanillaTilt.init(document.querySelectorAll("[data-tilt]"), {
+            max: 5,
+            speed: 400,
+            glare: true,
+            "max-glare": 0.1,
+            perspective: 1000,
+        });
+
+        // Theme Toggle Logic
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+        const icon = themeToggle.querySelector('i');
+
+        // Check for saved theme
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        body.setAttribute('data-theme', savedTheme);
+        updateIcon(savedTheme);
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = body.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+            body.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateIcon(newTheme);
+        });
+
+        function updateIcon(theme) {
+            if (theme === 'dark') {
+                icon.className = 'fas fa-sun';
+            } else {
+                icon.className = 'fas fa-moon';
+            }
+        }
+
+        // Custom Cursor
+        const cursorDot = document.querySelector(".cursor-dot");
+        const cursorOutline = document.querySelector(".cursor-outline");
+
+        window.addEventListener("mousemove", (e) => {
+            const posX = e.clientX;
+            const posY = e.clientY;
+
+            cursorDot.style.left = `${posX}px`;
+            cursorDot.style.top = `${posY}px`;
+
+            cursorOutline.animate({
+                left: `${posX}px`,
+                top: `${posY}px`
+            }, { duration: 500, fill: "forwards" });
+        });
+
+        // Interactive Bento Hover Effect
+        const bentoItems = document.querySelectorAll('.bento-item');
+        bentoItems.forEach(item => {
+            item.addEventListener('mouseenter', () => {
+                cursorOutline.style.transform = 'translate(-50%, -50%) scale(1.5)';
+                cursorOutline.style.borderColor = 'var(--secondary)';
+            });
+            item.addEventListener('mouseleave', () => {
+                cursorOutline.style.transform = 'translate(-50%, -50%) scale(1)';
+                cursorOutline.style.borderColor = 'var(--primary)';
+            });
+        });
+    </script>
+</body>
+
+</html>
