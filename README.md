@@ -1,4 +1,4 @@
-# 🌌 Interstellar Portfolio: Rishi N Solanki/Maruti N Solanki
+# 🌌 Interstellar Portfolio: Rishi N Solanki/Maruti  Solanki
 
 A premium, high-performance personal portfolio featuring an immersive **3D Interstellar Workspace**, **Motion-Controlled Flight**, and a **Glassmorphism Design System**.
 
