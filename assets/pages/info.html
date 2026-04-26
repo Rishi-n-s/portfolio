@@ -16,13 +16,20 @@
     <div class="background-mesh"></div>
 
     <nav class="navbar">
-        <a href="../../index.html" class="back-link"><i class="fas fa-arrow-left"></i> <span>Back</span></a>
-        <h1 class="page-title">Personal <span class="highlight">Insights</span></h1>
-        <div class="nav-controls">
-            <button id="themeToggle" class="theme-toggle" aria-label="Toggle Theme"
-                style="background: none; border: none; cursor: pointer; color: inherit; font-size: 1.2rem;">
-                <i class="fas fa-sun"></i>
-            </button>
+        <div class="nav-content">
+            <a href="../../index.html" class="logo">MARU<span class="highlight">TI</span></a>
+            <ul class="nav-links">
+                <li><a href="../../index.html">Home</a></li>
+                <li><a href="info.html" class="active">Info</a></li>
+                <li><a href="certifications.html">Certifications</a></li>
+                <li><a href="workspace.html">Work</a></li>
+            </ul>
+            <div class="nav-controls">
+                <button id="themeToggle" class="theme-toggle" aria-label="Toggle Theme">
+                    <i class="fas fa-sun"></i>
+                </button>
+                <button class="menu-toggle"><i class="fas fa-bars"></i></button>
+            </div>
         </div>
     </nav>
 
@@ -124,16 +131,16 @@
                     <h3>Connect</h3>
                 </div>
                 <div class="social-links-grid">
-                    <a href="#" class="social-btn github">
+                    <a href="https://github.com/Rishi-n-s" class="social-btn github">
                         <i class="fab fa-github"></i> GitHub
                     </a>
-                    <a href="#" class="social-btn linkedin">
+                    <a href="https://www.linkedin.com/in/rishi-solanki-505a9b380/" class="social-btn linkedin">
                         <i class="fab fa-linkedin"></i> LinkedIn
                     </a>
-                    <a href="#" class="social-btn twitter">
+                    <a href="https://www.instagram.com/not.a.superman_rishi?igsh=ZGszanp3bm93MHZj" class="social-btn twitter">
                         <i class="fab fa-instagram"></i> Instagram
                     </a>
-                    <a href="#" class="social-btn email">
+                    <a href="rishisolanki7319@gmail.com" class="social-btn email">
                         <i class="fas fa-envelope"></i> Email
                     </a>
                 </div>
@@ -158,6 +165,7 @@
     <div class="cursor-outline"></div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
+    <script src="../js/script.js"></script>
     <script>
         // Initialize Tilt
         VanillaTilt.init(document.querySelectorAll("[data-tilt]"), {
@@ -168,60 +176,22 @@
             perspective: 1000,
         });
 
-        // Theme Toggle Logic
-        const themeToggle = document.getElementById('themeToggle');
-        const body = document.body;
-        const icon = themeToggle.querySelector('i');
-
-        // Check for saved theme
-        const savedTheme = localStorage.getItem('theme') || 'dark';
-        body.setAttribute('data-theme', savedTheme);
-        updateIcon(savedTheme);
-
-        themeToggle.addEventListener('click', () => {
-            const currentTheme = body.getAttribute('data-theme');
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-
-            body.setAttribute('data-theme', newTheme);
-            localStorage.setItem('theme', newTheme);
-            updateIcon(newTheme);
-        });
-
-        function updateIcon(theme) {
-            if (theme === 'dark') {
-                icon.className = 'fas fa-sun';
-            } else {
-                icon.className = 'fas fa-moon';
-            }
-        }
-
-        // Custom Cursor
-        const cursorDot = document.querySelector(".cursor-dot");
-        const cursorOutline = document.querySelector(".cursor-outline");
-
-        window.addEventListener("mousemove", (e) => {
-            const posX = e.clientX;
-            const posY = e.clientY;
-
-            cursorDot.style.left = `${posX}px`;
-            cursorDot.style.top = `${posY}px`;
-
-            cursorOutline.animate({
-                left: `${posX}px`,
-                top: `${posY}px`
-            }, { duration: 500, fill: "forwards" });
-        });
-
         // Interactive Bento Hover Effect
         const bentoItems = document.querySelectorAll('.bento-item');
         bentoItems.forEach(item => {
             item.addEventListener('mouseenter', () => {
-                cursorOutline.style.transform = 'translate(-50%, -50%) scale(1.5)';
-                cursorOutline.style.borderColor = 'var(--secondary)';
+                const cursorOutline = document.querySelector(".cursor-outline");
+                if (cursorOutline) {
+                    cursorOutline.style.transform = 'translate(-50%, -50%) scale(1.5)';
+                    cursorOutline.style.borderColor = 'var(--secondary)';
+                }
             });
             item.addEventListener('mouseleave', () => {
-                cursorOutline.style.transform = 'translate(-50%, -50%) scale(1)';
-                cursorOutline.style.borderColor = 'var(--primary)';
+                const cursorOutline = document.querySelector(".cursor-outline");
+                if (cursorOutline) {
+                    cursorOutline.style.transform = 'translate(-50%, -50%) scale(1)';
+                    cursorOutline.style.borderColor = 'var(--primary)';
+                }
             });
         });
     </script>
