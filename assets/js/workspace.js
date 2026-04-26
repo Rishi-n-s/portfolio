@@ -8,7 +8,7 @@ const projects = [
         desc: "A massive industrial planet coordinating the flow of digital trade across the star system.", 
         link: "https://fleet-flow.netlify.app/", 
         img: "../images/fleet.jpg",
-        color: 0x00f2ff,
+        color: 0x3b82f6,
         pos: { x: 120, y: 0, z: -150 },
         size: 18
     },
@@ -18,7 +18,7 @@ const projects = [
         desc: "A vibrant world of mirrors and clay, preserving traditional artistry in the infinite void.", 
         link: "https://tarika-lippan-art-rishi.vercel.app/", 
         img: "../images/tarika.jpg",
-        color: 0xffa200,
+        color: 0x60a5fa,
         pos: { x: -180, y: 40, z: -80 },
         size: 25
     },
@@ -28,19 +28,19 @@ const projects = [
         desc: "A crystalline world housing the verified data of professional milestones and technical mastery.", 
         link: "certifications.html", 
         img: "../images/certifications.png",
-        color: 0x7000ff,
+        color: 0x2563eb,
         pos: { x: 50, y: -80, z: 220 },
         size: 20
     },
     { 
         title: "Personal Info", 
         category: "Identity Sphere", 
-        desc: "A bright, welcoming planet containing the biographical data and professional philosophy of the pilot.", 
+        desc: "A stunning crystalline world housing the biographical essence and professional vision of the pilot.", 
         link: "info.html", 
-        img: "../images/profile.jpeg",
-        color: 0x00D2FF,
+        img: "../images/info_planet.png",
+        color: 0x00f2ff,
         pos: { x: -300, y: -20, z: -250 },
-        size: 15
+        size: 20
     }
 ];
 
@@ -358,13 +358,13 @@ function animate() {
     if (keys['ArrowDown']) shipGroup.rotation.x += rotationSpeed;
 
     if (isJoystickActive) {
-        const joystickSens = 0.02;
+        const joystickSens = 0.015;
         shipGroup.rotation.x -= joystickVector.y * joystickSens;
         shipGroup.rotation.y -= joystickVector.x * joystickSens;
     }
 
     const moveDir = new THREE.Vector3();
-    const currentSpeed = (isJoystickActive || isThrusting) ? 0.04 : speed; 
+    const currentSpeed = (isJoystickActive || isThrusting) ? 0.02 : speed; 
     const thrusting = keys['KeyW'] || isThrusting || keys['KeyS'] || keys['KeyA'] || keys['KeyD'];
 
     if (keys['KeyW'] || isThrusting) moveDir.z = currentSpeed;

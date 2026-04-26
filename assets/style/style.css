@@ -1,14 +1,14 @@
 :root {
-    --bg-color: #050505;
-    --text-primary: #ffffff;
-    --text-secondary: #a0a0a0;
-    --accent: #6C5CE7;
-    --accent-secondary: #00D2FF;
-    --glass-bg: rgba(255, 255, 255, 0.03);
-    --glass-border: rgba(255, 255, 255, 0.05);
+    --bg-color: #020617; /* Deep Navy/Slate */
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    --accent: #3b82f6; /* Professional Blue */
+    --accent-secondary: #60a5fa;
+    --glass-bg: rgba(30, 41, 59, 0.7);
+    --glass-border: rgba(255, 255, 255, 0.1);
     --font-sans: 'Outfit', sans-serif;
     --font-serif: 'Playfair Display', serif;
-    --transition: all 0.3s ease;
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --shadow-sm: 0 5px 15px rgba(0, 0, 0, 0.2);
     --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.3);
     --shadow-lg: 0 15px 40px rgba(0, 0, 0, 0.4);
@@ -100,10 +100,7 @@ body {
 }
 
 .highlight {
-    color: var(--accent-secondary);
-    background: linear-gradient(to right, var(--accent), var(--accent-secondary));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: var(--accent);
 }
 
 .section-header {
@@ -136,10 +133,10 @@ body {
 }
 
 .btn-primary {
-    background: linear-gradient(45deg, var(--accent), var(--accent-secondary));
+    background: var(--accent);
     color: white;
     border: none;
-    box-shadow: 0 4px 15px rgba(108, 92, 231, 0.4);
+    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
 }
 
 .btn-primary:hover {
@@ -186,6 +183,7 @@ body {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 2rem;
+    position: relative; /* Fixed for mobile nav positioning */
 }
 
 .logo {
@@ -775,6 +773,24 @@ footer {
     
     .nav-links {
         display: none; /* Hide desktop nav */
+        position: absolute;
+        top: calc(100% + 15px);
+        left: 0;
+        width: 100%;
+        background: var(--glass-bg);
+        backdrop-filter: blur(20px);
+        flex-direction: column;
+        padding: 2rem;
+        gap: 1.5rem;
+        text-align: center;
+        border-radius: 20px;
+        box-shadow: var(--shadow-lg);
+        border: 1px solid var(--glass-border);
+        z-index: 2000;
+    }
+    
+    .nav-links.active {
+        display: flex;
     }
     
     .menu-toggle {
